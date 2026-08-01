@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T21:24:38.136Z",
+  "generatedAt": "2026-08-01T23:32:09.563Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "95e324d8c3c5a8e35333aacf950ebcd70fb0fb88ca0a4e8dfe6c59a5b33e5845",
+  "contentHash": "bd0da4ead17d288ed608d1b2abf54586654b532648e9d9f3772335e2641ef8ea",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -38,7 +38,7 @@
   "files": [
     ".htaccess",
     "404.html",
-    "_next/static/chunks/3-ryoo8vi4mzf.css",
+    "_next/static/chunks/1e-6d1rkeua3z.css",
     "_next/static/media/35597f1def34002a-s.p.15jyn9s6-kaki.woff2",
     "_next/static/media/58c4895d0a0ef7cc-s.2vhvl9vrvk-va.woff2",
     "_next/static/media/6ab0db14f70d8ed6-s.13hnt-xgp82zk.woff2",
