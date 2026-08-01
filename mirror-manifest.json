@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T19:42:37.684Z",
+  "generatedAt": "2026-08-01T21:24:38.136Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "22e1e3f013ee4647ed3fb6c5f2e9579bcbfcafd77e9559cc7fc28311217be5e5",
+  "contentHash": "95e324d8c3c5a8e35333aacf950ebcd70fb0fb88ca0a4e8dfe6c59a5b33e5845",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -11,12 +11,14 @@
     "https://cadcrimea.ru/uslugi/razdel-uchastka",
     "https://cadcrimea.ru/uslugi/ocenka-nedvizhimosti",
     "https://cadcrimea.ru/goroda/simferopol",
+    "https://cadcrimea.ru/goroda",
     "https://cadcrimea.ru/dlya",
     "https://cadcrimea.ru/dlya/municipalitetov",
     "https://cadcrimea.ru/dlya/rieltorov",
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/geodezicheskoe-obespechenie-inventarizacii-municipalnyh-obektov--k-dxgo",
     "https://cadcrimea.ru/materialy/geodezicheskoe-soprovozhdenie-pri-podgotovke-ploschadki-stroitelstva--k-b1dk",
     "https://cadcrimea.ru/materialy/kak-obedinenie-uchastkov-vliyaet-na-stoimost--k-e_su",
     "https://cadcrimea.ru/materialy/mify-ob-ocenke-kommercheskih-obektov-nedvizhimosti--k-wgx6",
@@ -36,7 +38,7 @@
   "files": [
     ".htaccess",
     "404.html",
-    "_next/static/chunks/3w1-a3sk1v204.css",
+    "_next/static/chunks/3-ryoo8vi4mzf.css",
     "_next/static/media/35597f1def34002a-s.p.15jyn9s6-kaki.woff2",
     "_next/static/media/58c4895d0a0ef7cc-s.2vhvl9vrvk-va.woff2",
     "_next/static/media/6ab0db14f70d8ed6-s.13hnt-xgp82zk.woff2",
@@ -59,6 +61,7 @@
     "assets/cards/cxCxROEZo0UF-v1.png",
     "assets/cards/eawkvypzSy5s-v2.png",
     "assets/cards/kzEdBBGxNzDt-v1.png",
+    "assets/cards/mP7OE4BAxwul-v1.png",
     "assets/cards/pBPyePBVsE-5-v1.png",
     "assets/cards/rycENtX5IkZK-v1.png",
     "assets/cards/sJRxx9l1RhwG-v1.png",
@@ -80,11 +83,13 @@
     "feed.xml",
     "file.svg",
     "globe.svg",
+    "goroda/index.html",
     "goroda/simferopol/index.html",
     "index.html",
     "legal/index.html",
     "materialy/dokumenty-dlya-ocenki-nedvizhimosti-pri-nasledovanii--k-nvff/index.html",
     "materialy/etapy-podgotovki-k-razdelu-uchastka--k-6sgj/index.html",
+    "materialy/geodezicheskoe-obespechenie-inventarizacii-municipalnyh-obektov--k-dxgo/index.html",
     "materialy/geodezicheskoe-soprovozhdenie-pri-podgotovke-ploschadki-stroitelstva--k-b1dk/index.html",
     "materialy/index.html",
     "materialy/izmeneniya-v-poryadke-registracii-nedvizhimosti--k-iwtx/index.html",
@@ -109,6 +114,7 @@
     "uslugi/razdel-uchastka/index.html",
     "vercel.svg",
     "window.svg",
+    "yandex_df1a6d9ee67dc008.html",
     "mirror-manifest.json"
   ]
 }

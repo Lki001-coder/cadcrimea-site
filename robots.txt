@@ -9,5 +9,4 @@ Disallow: /go/
 Disallow: /contact/
 Disallow: /card-preview
 
-Host: https://cadcrimea.ru
 Sitemap: https://cadcrimea.ru/sitemap.xml
