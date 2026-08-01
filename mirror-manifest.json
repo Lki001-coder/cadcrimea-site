@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T11:45:34.350Z",
+  "generatedAt": "2026-08-01T11:49:16.550Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "0db2642e7d6770a7f535b7d9efe1f84e595f900c4b8c03d3fc7ad519eb3e935b",
+  "contentHash": "5c7fc4107bfab9b0a96244e106dc9e2cb1a17c154aa73401e7d9e9b9b87490f2",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -17,6 +17,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/geodezicheskoe-soprovozhdenie-pri-podgotovke-ploschadki-stroitelstva--k-b1dk",
     "https://cadcrimea.ru/materialy/kak-obedinenie-uchastkov-vliyaet-na-stoimost--k-e_su",
     "https://cadcrimea.ru/materialy/mify-ob-ocenke-kommercheskih-obektov-nedvizhimosti--k-wgx6",
     "https://cadcrimea.ru/materialy/izmeneniya-v-poryadke-registracii-nedvizhimosti--k-iwtx",
@@ -57,6 +58,7 @@
     "assets/cards/UfaQaxuHUS6s-v1.png",
     "assets/cards/cxCxROEZo0UF-v1.png",
     "assets/cards/eawkvypzSy5s-v2.png",
+    "assets/cards/kzEdBBGxNzDt-v1.png",
     "assets/cards/pBPyePBVsE-5-v1.png",
     "assets/cards/rycENtX5IkZK-v1.png",
     "assets/cards/sJRxx9l1RhwG-v1.png",
@@ -83,6 +85,7 @@
     "legal/index.html",
     "materialy/dokumenty-dlya-ocenki-nedvizhimosti-pri-nasledovanii--k-nvff/index.html",
     "materialy/etapy-podgotovki-k-razdelu-uchastka--k-6sgj/index.html",
+    "materialy/geodezicheskoe-soprovozhdenie-pri-podgotovke-ploschadki-stroitelstva--k-b1dk/index.html",
     "materialy/index.html",
     "materialy/izmeneniya-v-poryadke-registracii-nedvizhimosti--k-iwtx/index.html",
     "materialy/kak-argumentirovat-poziciyu-v-spore-o-granicah--k-viwk/index.html",
