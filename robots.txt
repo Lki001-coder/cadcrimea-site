@@ -1,0 +1,13 @@
+User-Agent: *
+Allow: /
+Allow: /uslugi/
+Allow: /goroda/
+Allow: /dlya/
+Allow: /materialy/
+Disallow: /api/
+Disallow: /go/
+Disallow: /contact/
+Disallow: /card-preview
+
+Host: https://cadcrimea.ru
+Sitemap: https://cadcrimea.ru/sitemap.xml
