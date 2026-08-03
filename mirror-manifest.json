@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-03T08:47:49.470Z",
+  "generatedAt": "2026-08-03T12:42:39.783Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "70e231fbc713c71e3c115c49865e198f3d9e9adfdeb2fe454dd097ace34dc38a",
+  "contentHash": "f61dbe4558ef99a5195c8750dd2e81ba4ef87eea8851c261ac9c781f872cdb54",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/obnovlenie-pravil-raboty-s-egrn-chto-nuzhno-znat-posle-prinyatiya-fz-263--k-tsah",
     "https://cadcrimea.ru/materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg",
     "https://cadcrimea.ru/materialy/geodezicheskoe-obespechenie-inventarizacii-municipalnyh-obektov--k-dxgo",
     "https://cadcrimea.ru/materialy/geodezicheskoe-soprovozhdenie-pri-podgotovke-ploschadki-stroitelstva--k-b1dk",
@@ -57,6 +58,7 @@
     "a1f7702e33e544278ab36b767397e582.txt",
     "assets/cards/2KPklLLeKfDH-v1.png",
     "assets/cards/3F4Mffrk0XEO-v1.png",
+    "assets/cards/4dAJUrt6Stt6-v1.png",
     "assets/cards/HImjOdDe6d9w-v1.png",
     "assets/cards/LcXLYSqCOmxN-v1.png",
     "assets/cards/UfaQaxuHUS6s-v1.png",
@@ -100,6 +102,7 @@
     "materialy/kak-proverit-granicy-uchastka-pered-stroitelstvom--k-qr2o/index.html",
     "materialy/mify-o-registracii-pereplanirovki-kvartiry--k-ezol/index.html",
     "materialy/mify-ob-ocenke-kommercheskih-obektov-nedvizhimosti--k-wgx6/index.html",
+    "materialy/obnovlenie-pravil-raboty-s-egrn-chto-nuzhno-znat-posle-prinyatiya-fz-263--k-tsah/index.html",
     "materialy/ocenka-nedvizhimosti-dlya-suda-otchet-ili-ekspertiza--k-dcqo/index.html",
     "materialy/oshibki-pri-obedinenii-smezhnyh-zemelnyh-uchastkov--k-w13a/index.html",
     "materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg/index.html",
