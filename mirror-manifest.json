@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-06T07:14:39.166Z",
+  "generatedAt": "2026-08-06T10:08:40.788Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "6b2ef1cf85cfdc7318991dcbc76064db544ef9a20a18255a33308c2dc4ab0955",
+  "contentHash": "b98a20a0803254d59605a469f84a18b19c5efa452a6d07d268ee614d7694043b",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/otlichiya-ocenki-dlya-banka-i-rynka--k-0gtg",
     "https://cadcrimea.ru/materialy/kak-pravilno-provesti-ocenku-nedvizhimosti-pri-oformlenii-nasledstva-pos--k-l1mh",
     "https://cadcrimea.ru/materialy/topograficheskaya-semka-dlya-kachestvennogo-proektirovaniya--k-cfch",
     "https://cadcrimea.ru/materialy/obnovlenie-pravil-raboty-s-egrn-chto-nuzhno-znat-posle-prinyatiya-fz-263--k-tsah",
@@ -59,6 +60,7 @@
     "_next/static/media/ea95a6c50203df72-s.3-wuczr-njsez.woff2",
     "a1f7702e33e544278ab36b767397e582.txt",
     "assets/cards/2KPklLLeKfDH-v1.png",
+    "assets/cards/2StVqUXLeV2G-v1.png",
     "assets/cards/3F4Mffrk0XEO-v1.png",
     "assets/cards/4dAJUrt6Stt6-v1.png",
     "assets/cards/BJtWGS0U-IKy-v1.png",
@@ -110,6 +112,7 @@
     "materialy/obnovlenie-pravil-raboty-s-egrn-chto-nuzhno-znat-posle-prinyatiya-fz-263--k-tsah/index.html",
     "materialy/ocenka-nedvizhimosti-dlya-suda-otchet-ili-ekspertiza--k-dcqo/index.html",
     "materialy/oshibki-pri-obedinenii-smezhnyh-zemelnyh-uchastkov--k-w13a/index.html",
+    "materialy/otlichiya-ocenki-dlya-banka-i-rynka--k-0gtg/index.html",
     "materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg/index.html",
     "materialy/raznica-mezhdu-kadastrovoy-i-rynochnoy-cenoy--k-dkc8/index.html",
     "materialy/topograficheskaya-semka-dlya-kachestvennogo-proektirovaniya--k-cfch/index.html",
