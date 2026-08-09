@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-09T15:01:35.896Z",
+  "generatedAt": "2026-08-09T15:56:41.458Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "fa6ea2433e9ba7a1bc4804eb0553d1f0aad9f6598bfa3c41eb9a56015f637d5d",
+  "contentHash": "f5f89b6665437cced2f5cfe64044d53071a866b8027f286850c8470fade0238c",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/chto-proverit-vladelcu-zemli-pered-razdelom-uchastka--k-thxw",
     "https://cadcrimea.ru/materialy/ocenka-zemelnogo-uchastka-dlya-oformleniya-nasledstva--k-dd48",
     "https://cadcrimea.ru/materialy/otlichiya-ocenki-dlya-banka-i-rynka--k-0gtg",
     "https://cadcrimea.ru/materialy/kak-pravilno-provesti-ocenku-nedvizhimosti-pri-oformlenii-nasledstva-pos--k-l1mh",
@@ -60,6 +61,7 @@
     "_next/static/media/ddbd854add8353d7-s.1ht_rhgwo8zdn.woff2",
     "_next/static/media/ea95a6c50203df72-s.3-wuczr-njsez.woff2",
     "a1f7702e33e544278ab36b767397e582.txt",
+    "assets/cards/-WmG0st3BF0D-v1.png",
     "assets/cards/2KPklLLeKfDH-v1.png",
     "assets/cards/2StVqUXLeV2G-v1.png",
     "assets/cards/3F4Mffrk0XEO-v1.png",
@@ -99,6 +101,7 @@
     "goroda/simferopol/index.html",
     "index.html",
     "legal/index.html",
+    "materialy/chto-proverit-vladelcu-zemli-pered-razdelom-uchastka--k-thxw/index.html",
     "materialy/dokumenty-dlya-ocenki-nedvizhimosti-pri-nasledovanii--k-nvff/index.html",
     "materialy/etapy-podgotovki-k-razdelu-uchastka--k-6sgj/index.html",
     "materialy/geodezicheskoe-obespechenie-inventarizacii-municipalnyh-obektov--k-dxgo/index.html",
