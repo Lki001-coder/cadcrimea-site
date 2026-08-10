@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-10T13:54:10.549Z",
+  "generatedAt": "2026-08-10T15:31:52.302Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "cfd9184820326b83121bdf9c63246b12f7b2e781c4e9190685161404e04d5d11",
+  "contentHash": "200e9434465977f272adf04a645d66c6bf1d3d45b2889b078dd13c92f9f97112",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/organizaciya-geodezicheskih-rabot-na-stroitelnoy-ploschadke--k-mbpa",
     "https://cadcrimea.ru/materialy/ocenka-municipalnoy-nedvizhimosti-razlichiya-celey-i-podhodov--k-07yi",
     "https://cadcrimea.ru/materialy/chto-proverit-vladelcu-zemli-pered-razdelom-uchastka--k-thxw",
     "https://cadcrimea.ru/materialy/ocenka-zemelnogo-uchastka-dlya-oformleniya-nasledstva--k-dd48",
@@ -69,6 +70,7 @@
     "assets/cards/4dAJUrt6Stt6-v1.png",
     "assets/cards/BJtWGS0U-IKy-v1.png",
     "assets/cards/CTzESwqvA-ep-v1.png",
+    "assets/cards/FpmmASEfRgEj-v1.png",
     "assets/cards/HImjOdDe6d9w-v1.png",
     "assets/cards/LcXLYSqCOmxN-v1.png",
     "assets/cards/UfaQaxuHUS6s-v1.png",
@@ -120,6 +122,7 @@
     "materialy/ocenka-municipalnoy-nedvizhimosti-razlichiya-celey-i-podhodov--k-07yi/index.html",
     "materialy/ocenka-nedvizhimosti-dlya-suda-otchet-ili-ekspertiza--k-dcqo/index.html",
     "materialy/ocenka-zemelnogo-uchastka-dlya-oformleniya-nasledstva--k-dd48/index.html",
+    "materialy/organizaciya-geodezicheskih-rabot-na-stroitelnoy-ploschadke--k-mbpa/index.html",
     "materialy/oshibki-pri-obedinenii-smezhnyh-zemelnyh-uchastkov--k-w13a/index.html",
     "materialy/otlichiya-ocenki-dlya-banka-i-rynka--k-0gtg/index.html",
     "materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg/index.html",
