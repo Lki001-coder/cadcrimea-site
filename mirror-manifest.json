@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-12T15:30:38.267Z",
+  "generatedAt": "2026-08-12T17:27:33.458Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "fb06623bcad5823657192bf671bb25b56a0ce9bc114cd126786bcbb1339aacda",
+  "contentHash": "b265e11a3325124444adc77a4ab06aff0f217b6de499fa25a104f202081c8477",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/chto-vliyaet-na-ocenku-kommercheskogo-obekta--k-jnx7",
     "https://cadcrimea.ru/materialy/obedinenie-zemelnyh-uchastkov-riski-nesovmestimosti-harakteristik--k-_lbe",
     "https://cadcrimea.ru/materialy/poshagovoe-oformlenie-zhilogo-doma-v-sobstvennost--k-noph",
     "https://cadcrimea.ru/materialy/organizaciya-geodezicheskih-rabot-na-stroitelnoy-ploschadke--k-mbpa",
@@ -88,6 +89,7 @@
     "assets/cards/sJRxx9l1RhwG-v1.png",
     "assets/cards/tObElvf0JQ1s-v1.png",
     "assets/cards/uvpbMRHgHPpE-v1.png",
+    "assets/cards/vw-f2iiF1AkJ-v1.png",
     "assets/cards/zB1vV7ATz8f4-v1.png",
     "brand/README.md",
     "brand/cadastral-map.webp",
@@ -110,6 +112,7 @@
     "index.html",
     "legal/index.html",
     "materialy/chto-proverit-vladelcu-zemli-pered-razdelom-uchastka--k-thxw/index.html",
+    "materialy/chto-vliyaet-na-ocenku-kommercheskogo-obekta--k-jnx7/index.html",
     "materialy/dokumenty-dlya-ocenki-nedvizhimosti-pri-nasledovanii--k-nvff/index.html",
     "materialy/etapy-podgotovki-k-razdelu-uchastka--k-6sgj/index.html",
     "materialy/geodezicheskoe-obespechenie-inventarizacii-municipalnyh-obektov--k-dxgo/index.html",
