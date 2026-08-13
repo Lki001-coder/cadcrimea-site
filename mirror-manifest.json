@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-13T12:08:28.635Z",
+  "generatedAt": "2026-08-13T13:56:26.902Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "95cda44daadfb83351dd1d6b865948befedb2d32f23807a2a7903d047f6060a9",
+  "contentHash": "b070cda26886818f07e73be51db2afeab82f07ad8dbf5de7e6f39c91bbd0bae7",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/registraciya-municipalnyh-zdaniy-i-sooruzheniy--k-8vmc",
     "https://cadcrimea.ru/materialy/kontrol-tochnosti-geodezicheskoy-osnovy-na-stroyploschadke--k-fwhz",
     "https://cadcrimea.ru/materialy/kakie-dannye-podgotovit-dlya-geodezii--k-bale",
     "https://cadcrimea.ru/materialy/chto-vliyaet-na-ocenku-kommercheskogo-obekta--k-jnx7",
@@ -83,6 +84,7 @@
     "assets/cards/UfaQaxuHUS6s-v1.png",
     "assets/cards/VU1oDjs-_kPR-v1.png",
     "assets/cards/ZRqsMLfrkh7K-v1.png",
+    "assets/cards/bBtGmW-Sl14S-v1.png",
     "assets/cards/cxCxROEZo0UF-v1.png",
     "assets/cards/eawkvypzSy5s-v2.png",
     "assets/cards/j4dQ0SyRj7xj-v1.png",
@@ -142,6 +144,7 @@
     "materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg/index.html",
     "materialy/poshagovoe-oformlenie-zhilogo-doma-v-sobstvennost--k-noph/index.html",
     "materialy/raznica-mezhdu-kadastrovoy-i-rynochnoy-cenoy--k-dkc8/index.html",
+    "materialy/registraciya-municipalnyh-zdaniy-i-sooruzheniy--k-8vmc/index.html",
     "materialy/topograficheskaya-semka-dlya-kachestvennogo-proektirovaniya--k-cfch/index.html",
     "next.svg",
     "privacy/index.html",
