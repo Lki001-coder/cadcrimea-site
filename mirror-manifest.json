@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-13T05:17:25.417Z",
+  "generatedAt": "2026-08-13T06:56:40.044Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "90dcc48be0359a25b3388785648df77203fe7b534c7b2f104ffae21343106b1e",
+  "contentHash": "fc19f869cf9414616c873c0a4564c99b4fb9f7630c41436050a62d35b23427f4",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/kakie-dannye-podgotovit-dlya-geodezii--k-bale",
     "https://cadcrimea.ru/materialy/chto-vliyaet-na-ocenku-kommercheskogo-obekta--k-jnx7",
     "https://cadcrimea.ru/materialy/obedinenie-zemelnyh-uchastkov-riski-nesovmestimosti-harakteristik--k-_lbe",
     "https://cadcrimea.ru/materialy/poshagovoe-oformlenie-zhilogo-doma-v-sobstvennost--k-noph",
@@ -79,6 +80,7 @@
     "assets/cards/J-UhgxcPTIQU-v1.png",
     "assets/cards/LcXLYSqCOmxN-v1.png",
     "assets/cards/UfaQaxuHUS6s-v1.png",
+    "assets/cards/VU1oDjs-_kPR-v1.png",
     "assets/cards/ZRqsMLfrkh7K-v1.png",
     "assets/cards/cxCxROEZo0UF-v1.png",
     "assets/cards/eawkvypzSy5s-v2.png",
@@ -123,6 +125,7 @@
     "materialy/kak-obedinenie-uchastkov-vliyaet-na-stoimost--k-e_su/index.html",
     "materialy/kak-pravilno-provesti-ocenku-nedvizhimosti-pri-oformlenii-nasledstva-pos--k-l1mh/index.html",
     "materialy/kak-proverit-granicy-uchastka-pered-stroitelstvom--k-qr2o/index.html",
+    "materialy/kakie-dannye-podgotovit-dlya-geodezii--k-bale/index.html",
     "materialy/mify-o-registracii-pereplanirovki-kvartiry--k-ezol/index.html",
     "materialy/mify-ob-ocenke-kommercheskih-obektov-nedvizhimosti--k-wgx6/index.html",
     "materialy/obedinenie-zemelnyh-uchastkov-riski-nesovmestimosti-harakteristik--k-_lbe/index.html",
