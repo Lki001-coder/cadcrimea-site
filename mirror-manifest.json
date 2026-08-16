@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-16T13:09:22.234Z",
+  "generatedAt": "2026-08-16T13:52:04.103Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "626dd5b4a5d549a42fb372aac9df1761ef51597a89d85a7db57a7b01f47c1786",
+  "contentHash": "a00775ae64854947a0f00a5a4967af6fd3270c784369770abed622ec5ed9b1c9",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/razdel-uchastka-pered-prodazhey-i-dlya-sebya--k-8j9l",
     "https://cadcrimea.ru/materialy/obedinenie-municipalnyh-uchastkov-pri-provedenii-inventarizacii--k-mfyi",
     "https://cadcrimea.ru/materialy/kak-poluchit-skidku-na-kadastrovye-raboty--k-zxzk",
     "https://cadcrimea.ru/materialy/registraciya-municipalnyh-zdaniy-i-sooruzheniy--k-8vmc",
@@ -78,6 +79,7 @@
     "assets/cards/4IOmArFSx-JZ-v1.png",
     "assets/cards/4dAJUrt6Stt6-v1.png",
     "assets/cards/BJtWGS0U-IKy-v1.png",
+    "assets/cards/BsoDe4riSK_f-v1.png",
     "assets/cards/CTzESwqvA-ep-v1.png",
     "assets/cards/F_e_wy62Jd3z-v1.png",
     "assets/cards/FpmmASEfRgEj-v1.png",
@@ -149,6 +151,7 @@
     "materialy/otlichiya-ocenki-dlya-banka-i-rynka--k-0gtg/index.html",
     "materialy/podgotovka-geodezicheskih-dannyh-dlya-municipalnoy-inventarizacii--k-x0tg/index.html",
     "materialy/poshagovoe-oformlenie-zhilogo-doma-v-sobstvennost--k-noph/index.html",
+    "materialy/razdel-uchastka-pered-prodazhey-i-dlya-sebya--k-8j9l/index.html",
     "materialy/raznica-mezhdu-kadastrovoy-i-rynochnoy-cenoy--k-dkc8/index.html",
     "materialy/registraciya-municipalnyh-zdaniy-i-sooruzheniy--k-8vmc/index.html",
     "materialy/topograficheskaya-semka-dlya-kachestvennogo-proektirovaniya--k-cfch/index.html",
