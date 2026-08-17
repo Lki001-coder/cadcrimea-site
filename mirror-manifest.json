@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-17T11:51:20.345Z",
+  "generatedAt": "2026-08-17T13:17:45.728Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "012c3e47045b3758f693c13cf5a037abb60335dffb4f68cbcfa7ddd8a3b0d1a3",
+  "contentHash": "3c180dd25cbb9800c98b49cfdaa8d31d3c1a26960fd4771057a59c363743391b",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/kak-podgotovitsya-k-sudebnoy-ocenke--k-jiay",
     "https://cadcrimea.ru/materialy/obedinenie-uchastkov-pri-nalichii-deystvuyuschih-obremeneniy--k-a2ft",
     "https://cadcrimea.ru/materialy/razdel-uchastka-pered-prodazhey-i-dlya-sebya--k-8j9l",
     "https://cadcrimea.ru/materialy/obedinenie-municipalnyh-uchastkov-pri-provedenii-inventarizacii--k-mfyi",
@@ -93,6 +94,7 @@
     "assets/cards/VU1oDjs-_kPR-v1.png",
     "assets/cards/ZRqsMLfrkh7K-v1.png",
     "assets/cards/bBtGmW-Sl14S-v1.png",
+    "assets/cards/cjPk5uNQ3m4Z-v1.png",
     "assets/cards/cxCxROEZo0UF-v1.png",
     "assets/cards/eawkvypzSy5s-v2.png",
     "assets/cards/j4dQ0SyRj7xj-v1.png",
@@ -135,6 +137,7 @@
     "materialy/izmeneniya-v-poryadke-registracii-nedvizhimosti--k-iwtx/index.html",
     "materialy/kak-argumentirovat-poziciyu-v-spore-o-granicah--k-viwk/index.html",
     "materialy/kak-obedinenie-uchastkov-vliyaet-na-stoimost--k-e_su/index.html",
+    "materialy/kak-podgotovitsya-k-sudebnoy-ocenke--k-jiay/index.html",
     "materialy/kak-poluchit-skidku-na-kadastrovye-raboty--k-zxzk/index.html",
     "materialy/kak-pravilno-provesti-ocenku-nedvizhimosti-pri-oformlenii-nasledstva-pos--k-l1mh/index.html",
     "materialy/kak-proverit-granicy-uchastka-pered-stroitelstvom--k-qr2o/index.html",
