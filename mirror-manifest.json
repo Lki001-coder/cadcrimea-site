@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-18T11:50:51.373Z",
+  "generatedAt": "2026-08-18T13:24:24.687Z",
   "source": "https://mycad-bot.vercel.app",
-  "contentHash": "ab70f17141d25a1482aabdddb3222805507c4f163c4e613bf7dd969202ad465c",
+  "contentHash": "6355089adb3ba1a39b0847cfbbf4c8ecc9fe770b7d7f44892b0125c860997d07",
   "urls": [
     "https://cadcrimea.ru/",
     "https://cadcrimea.ru/uslugi/kadastrovye-raboty",
@@ -18,6 +18,7 @@
     "https://cadcrimea.ru/dlya/yuristov",
     "https://cadcrimea.ru/dlya/stroiteley",
     "https://cadcrimea.ru/materialy",
+    "https://cadcrimea.ru/materialy/nuzhno-li-registrirovat-letnyuyu-kuhnyu--k-yy4z",
     "https://cadcrimea.ru/materialy/kak-podgotovitsya-k-sudebnoy-ocenke--k-jiay",
     "https://cadcrimea.ru/materialy/obedinenie-uchastkov-pri-nalichii-deystvuyuschih-obremeneniy--k-a2ft",
     "https://cadcrimea.ru/materialy/razdel-uchastka-pered-prodazhey-i-dlya-sebya--k-8j9l",
@@ -103,6 +104,7 @@
     "assets/cards/pBPyePBVsE-5-v1.png",
     "assets/cards/rycENtX5IkZK-v1.png",
     "assets/cards/sJRxx9l1RhwG-v1.png",
+    "assets/cards/sKuw-9w2gLrG-v1.png",
     "assets/cards/tObElvf0JQ1s-v1.png",
     "assets/cards/uvpbMRHgHPpE-v1.png",
     "assets/cards/vw-f2iiF1AkJ-v1.png",
@@ -145,6 +147,7 @@
     "materialy/kontrol-tochnosti-geodezicheskoy-osnovy-na-stroyploschadke--k-fwhz/index.html",
     "materialy/mify-o-registracii-pereplanirovki-kvartiry--k-ezol/index.html",
     "materialy/mify-ob-ocenke-kommercheskih-obektov-nedvizhimosti--k-wgx6/index.html",
+    "materialy/nuzhno-li-registrirovat-letnyuyu-kuhnyu--k-yy4z/index.html",
     "materialy/obedinenie-municipalnyh-uchastkov-pri-provedenii-inventarizacii--k-mfyi/index.html",
     "materialy/obedinenie-uchastkov-pri-nalichii-deystvuyuschih-obremeneniy--k-a2ft/index.html",
     "materialy/obedinenie-zemelnyh-uchastkov-riski-nesovmestimosti-harakteristik--k-_lbe/index.html",
