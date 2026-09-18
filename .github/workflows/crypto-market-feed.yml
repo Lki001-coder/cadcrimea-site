@@ -19,7 +19,7 @@ concurrency:
 jobs:
   update-feed:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 5
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
@@ -42,227 +42,174 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import json, math, os, statistics, time, urllib.request
+          import json, math, os, statistics, time, urllib.request, urllib.parse
           from datetime import datetime, timezone
 
-          SYMBOLS = ['BTCUSDT','ETHUSDT','SOLUSDT','XRPUSDT','BNBUSDT','DOGEUSDT','SUIUSDT','LINKUSDT','AVAXUSDT','AAVEUSDT','HYPEUSDT']
-          NOW_MS = int(time.time()*1000)
-          UA = {'User-Agent':'crypto-market-feed/1.0'}
+          SYMBOLS=['BTCUSDT','ETHUSDT','SOLUSDT','XRPUSDT','BNBUSDT','DOGEUSDT','SUIUSDT','LINKUSDT','AVAXUSDT','AAVEUSDT','HYPEUSDT']
+          NOW_MS=int(time.time()*1000)
+          UA={'User-Agent':'Mozilla/5.0 crypto-market-feed/2.0','Accept':'application/json'}
 
           def get_json(url, timeout=8):
-              req = urllib.request.Request(url, headers=UA)
-              with urllib.request.urlopen(req, timeout=timeout) as r:
+              req=urllib.request.Request(url,headers=UA)
+              with urllib.request.urlopen(req,timeout=timeout) as r:
                   return json.loads(r.read().decode('utf-8'))
 
           def f(x):
               try:
                   v=float(x)
                   return v if math.isfinite(v) else None
-              except Exception:
-                  return None
+              except Exception:return None
 
-          errors={}
-          raw={s:{} for s in SYMBOLS}
+          def med(vals):
+              vals=[x for x in vals if x is not None and x>0]
+              return statistics.median(vals) if vals else None
 
-          # Binance USD-M Futures: all 24h tickers + all premium index rows.
+          def pct(a,b):
+              if not a or not b:return None
+              return (a/b-1)*100
+
+          raw={s:{} for s in SYMBOLS}; errors={}
+
+          # Binance USD-M Futures (may geo-block GitHub runners; retained as best-effort fallback)
           try:
               t=get_json('https://fapi.binance.com/fapi/v1/ticker/24hr')
               p=get_json('https://fapi.binance.com/fapi/v1/premiumIndex')
               pm={x.get('symbol'):x for x in p if isinstance(x,dict)}
               for x in t:
                   s=x.get('symbol')
-                  if s not in raw: continue
+                  if s not in raw:continue
                   q=pm.get(s,{})
-                  raw[s]['binance']={
-                      'price':f(x.get('lastPrice')),
-                      'bid':f(x.get('bidPrice')),
-                      'ask':f(x.get('askPrice')),
-                      'mark':f(q.get('markPrice')),
-                      'index':f(q.get('indexPrice')),
-                      'funding':f(q.get('lastFundingRate')),
-                      'volume_24h_quote':f(x.get('quoteVolume')),
-                      'source_ts_ms':int(f(q.get('time')) or NOW_MS)
-                  }
-          except Exception as e: errors['binance']=repr(e)
+                  raw[s]['binance']={'price':f(x.get('lastPrice')),'bid':f(x.get('bidPrice')),'ask':f(x.get('askPrice')),'mark':f(q.get('markPrice')),'index':f(q.get('indexPrice')),'funding':f(q.get('lastFundingRate')),'volume_24h_quote':f(x.get('quoteVolume')),'source_ts_ms':int(f(q.get('time')) or NOW_MS)}
+          except Exception as e:errors['binance']=repr(e)
 
-          # Bybit V5 linear tickers includes price, mark/index, funding, OI, volume and top-of-book.
+          # Bybit V5 (best effort)
           try:
-              j=get_json('https://api.bybit.com/v5/market/tickers?category=linear')
-              source_ts=int(f(j.get('time')) or NOW_MS)
+              j=get_json('https://api.bybit.com/v5/market/tickers?category=linear'); ts=int(f(j.get('time')) or NOW_MS)
               for x in j.get('result',{}).get('list',[]):
                   s=x.get('symbol')
-                  if s not in raw: continue
-                  raw[s]['bybit']={
-                      'price':f(x.get('lastPrice')),
-                      'bid':f(x.get('bid1Price')),
-                      'ask':f(x.get('ask1Price')),
-                      'mark':f(x.get('markPrice')),
-                      'index':f(x.get('indexPrice')),
-                      'funding':f(x.get('fundingRate')),
-                      'open_interest_usd':f(x.get('openInterestValue')),
-                      'volume_24h_quote':f(x.get('turnover24h')),
-                      'source_ts_ms':source_ts
-                  }
-          except Exception as e: errors['bybit']=repr(e)
+                  if s not in raw:continue
+                  raw[s]['bybit']={'price':f(x.get('lastPrice')),'bid':f(x.get('bid1Price')),'ask':f(x.get('ask1Price')),'mark':f(x.get('markPrice')),'index':f(x.get('indexPrice')),'funding':f(x.get('fundingRate')),'open_interest_usd':f(x.get('openInterestValue')),'volume_24h_quote':f(x.get('turnover24h')),'source_ts_ms':ts}
+          except Exception as e:errors['bybit']=repr(e)
 
-          # OKX public SWAP tickers.
+          # OKX USDT perpetuals + public OI
+          okx_oi={}
+          try:
+              oj=get_json('https://www.okx.com/api/v5/public/open-interest?instType=SWAP')
+              for x in oj.get('data',[]):
+                  inst=x.get('instId','')
+                  if inst.endswith('-USDT-SWAP'):
+                      s=inst.split('-')[0]+'USDT'
+                      if s in raw: okx_oi[s]={'oi_base':f(x.get('oiCcy')),'ts':int(f(x.get('ts')) or NOW_MS)}
+          except Exception as e:errors['okx_oi']=repr(e)
           try:
               j=get_json('https://www.okx.com/api/v5/market/tickers?instType=SWAP')
               for x in j.get('data',[]):
                   inst=x.get('instId','')
-                  if not inst.endswith('-USDT-SWAP'): continue
-                  base=inst.split('-')[0]
-                  s=base+'USDT'
-                  if s not in raw: continue
-                  raw[s]['okx']={
-                      'price':f(x.get('last')),
-                      'bid':f(x.get('bidPx')),
-                      'ask':f(x.get('askPx')),
-                      'volume_24h_quote':f(x.get('volCcy24h')),
-                      'source_ts_ms':int(f(x.get('ts')) or NOW_MS)
-                  }
-          except Exception as e: errors['okx']=repr(e)
+                  if not inst.endswith('-USDT-SWAP'):continue
+                  s=inst.split('-')[0]+'USDT'
+                  if s not in raw:continue
+                  price=f(x.get('last')); oi_base=(okx_oi.get(s) or {}).get('oi_base')
+                  raw[s]['okx']={'price':price,'bid':f(x.get('bidPx')),'ask':f(x.get('askPx')),'open_interest_usd':(oi_base*price if oi_base and price else None),'volume_24h_quote':f(x.get('volCcy24h')),'source_ts_ms':int(f(x.get('ts')) or NOW_MS)}
+          except Exception as e:errors['okx']=repr(e)
 
-          # Gate.io USDT perpetual tickers.
+          # Gate.io perpetual tickers
           try:
               j=get_json('https://api.gateio.ws/api/v4/futures/usdt/tickers')
               for x in j:
-                  c=x.get('contract','')
-                  s=c.replace('_','')
-                  if s not in raw: continue
-                  raw[s]['gate']={
-                      'price':f(x.get('last')),
-                      'bid':f(x.get('highest_bid')),
-                      'ask':f(x.get('lowest_ask')),
-                      'mark':f(x.get('mark_price')),
-                      'index':f(x.get('index_price')),
-                      'funding':f(x.get('funding_rate')),
-                      'volume_24h_quote':f(x.get('volume_24h_quote')),
-                      'source_ts_ms':NOW_MS
-                  }
-          except Exception as e: errors['gate']=repr(e)
+                  s=x.get('contract','').replace('_','')
+                  if s not in raw:continue
+                  raw[s]['gate']={'price':f(x.get('last')),'bid':f(x.get('highest_bid')),'ask':f(x.get('lowest_ask')),'mark':f(x.get('mark_price')),'index':f(x.get('index_price')),'funding':f(x.get('funding_rate')),'volume_24h_quote':f(x.get('volume_24h_quote')),'source_ts_ms':NOW_MS}
+          except Exception as e:errors['gate']=repr(e)
 
-          def median(vals):
-              vals=[x for x in vals if x is not None and x>0]
-              return statistics.median(vals) if vals else None
+          # Gate contract stats: OI + liquidations. One public call per tracked contract.
+          gate_stats={}
+          for s in SYMBOLS:
+              c=s[:-4]+'_USDT'
+              try:
+                  u='https://api.gateio.ws/api/v4/futures/usdt/contract_stats?'+urllib.parse.urlencode({'contract':c,'interval':'5m','limit':'1'})
+                  arr=get_json(u)
+                  if arr:
+                      x=arr[-1]
+                      gate_stats[s]={'open_interest_usd':f(x.get('open_interest_usd')),'long_liq_usd':f(x.get('long_liq_usd_new') or x.get('long_liq_usd')),'short_liq_usd':f(x.get('short_liq_usd_new') or x.get('short_liq_usd')),'lsr_account':f(x.get('lsr_account')),'lsr_taker':f(x.get('lsr_taker'))}
+              except Exception as e:
+                  errors.setdefault('gate_stats',{})[s]=repr(e)
+              time.sleep(0.03)
+          for s,v in gate_stats.items():
+              if 'gate' in raw[s] and v.get('open_interest_usd'): raw[s]['gate']['open_interest_usd']=v['open_interest_usd']
 
-          def pct(a,b):
-              if not a or not b: return None
-              return (a/b-1.0)*100.0
+          # KuCoin USDT perpetuals fallback (XBT maps to BTC)
+          try:
+              j=get_json('https://api-futures.kucoin.com/api/v1/contracts/active')
+              for x in j.get('data',[]):
+                  base=(x.get('baseCurrency') or '').upper(); quote=(x.get('quoteCurrency') or '').upper()
+                  if base=='XBT':base='BTC'
+                  s=base+quote
+                  if quote!='USDT' or s not in raw:continue
+                  price=f(x.get('lastTradePrice')); oi=f(x.get('openInterest'))
+                  mult=f(x.get('multiplier'))
+                  oi_usd=(oi*mult*price if oi and mult and price else None)
+                  raw[s]['kucoin']={'price':price,'bid':f(x.get('bestBidPrice')),'ask':f(x.get('bestAskPrice')),'mark':f(x.get('markPrice')),'index':f(x.get('indexPrice')),'funding':f(x.get('fundingFeeRate')),'open_interest_usd':oi_usd,'volume_24h_quote':f(x.get('turnoverOf24h')),'source_ts_ms':NOW_MS}
+          except Exception as e:errors['kucoin']=repr(e)
 
-          # Previous history for changes and OI deltas.
+          # Bitget USDT futures fallback
+          try:
+              j=get_json('https://api.bitget.com/api/v2/mix/market/tickers?productType=USDT-FUTURES')
+              for x in j.get('data',[]):
+                  s=(x.get('symbol') or '').upper()
+                  if s not in raw:continue
+                  raw[s]['bitget']={'price':f(x.get('lastPr')),'bid':f(x.get('bidPr')),'ask':f(x.get('askPr')),'mark':f(x.get('markPrice')),'index':f(x.get('indexPrice')),'funding':f(x.get('fundingRate')),'open_interest_usd':f(x.get('holdingAmount'))*f(x.get('lastPr')) if f(x.get('holdingAmount')) and f(x.get('lastPr')) else None,'volume_24h_quote':f(x.get('usdtVolume') or x.get('turnover24h')),'source_ts_ms':int(f(x.get('ts')) or j.get('requestTime') or NOW_MS)}
+          except Exception as e:errors['bitget']=repr(e)
+
           history=[]
           if os.path.exists('history.json'):
               try:
-                  with open('history.json','r',encoding='utf-8') as fh: history=json.load(fh)
-                  if not isinstance(history,list): history=[]
-              except Exception: history=[]
+                  with open('history.json','r',encoding='utf-8') as fh:history=json.load(fh)
+                  if not isinstance(history,list):history=[]
+              except Exception:history=[]
 
-          def prior(symbol, minutes, field):
+          def prior(symbol,minutes,field):
               target=NOW_MS-minutes*60*1000
-              candidates=[h for h in history if h.get('ts_ms',0)<=target and symbol in h.get('market',{})]
-              if not candidates: return None
-              h=max(candidates,key=lambda z:z.get('ts_ms',0))
-              return h['market'][symbol].get(field)
+              c=[h for h in history if h.get('ts_ms',0)<=target and symbol in h.get('market',{})]
+              if not c:return None
+              h=max(c,key=lambda z:z.get('ts_ms',0)); return h['market'][symbol].get(field)
 
           market={}
-          for s, sources in raw.items():
-              prices=[v.get('price') for v in sources.values() if v.get('price')]
-              m0=median(prices)
-              if not m0:
-                  market[s]={'data_quality':'LOW','source_count':0,'sources':sources}
-                  continue
-              # Remove >1% price outliers from initial median.
-              good={k:v for k,v in sources.items() if v.get('price') and abs(v['price']/m0-1)<=0.01}
-              prices=[v['price'] for v in good.values()]
-              mp=median(prices)
-              dispersion=(max(prices)-min(prices))/mp*100 if len(prices)>=2 else None
-              ages=[max(0,(NOW_MS-int(v.get('source_ts_ms',NOW_MS)))/1000) for v in good.values()]
-              max_age=max(ages) if ages else 9999
-              if len(good)>=3 and (dispersion or 0)<=0.25 and max_age<=60:
-                  quality='HIGH'
-              elif len(good)>=2 and (dispersion or 0)<=0.75 and max_age<=90:
-                  quality='MEDIUM'
-              else:
-                  quality='LOW'
-
-              bids=[v.get('bid') for v in good.values() if v.get('bid')]
-              asks=[v.get('ask') for v in good.values() if v.get('ask')]
-              bid=median(bids); ask=median(asks)
+          for s,sources in raw.items():
+              p0=med([v.get('price') for v in sources.values()])
+              if not p0:
+                  market[s]={'data_quality':'LOW','source_count':0,'sources':sources};continue
+              good={k:v for k,v in sources.items() if v.get('price') and abs(v['price']/p0-1)<=0.01}
+              prices=[v['price'] for v in good.values()]; mp=med(prices)
+              disp=(max(prices)-min(prices))/mp*100 if len(prices)>=2 else None
+              ages=[max(0,(NOW_MS-int(v.get('source_ts_ms',NOW_MS)))/1000) for v in good.values()]; max_age=max(ages) if ages else 9999
+              quality='HIGH' if len(good)>=3 and (disp or 0)<=0.25 and max_age<=90 else ('MEDIUM' if len(good)>=2 and (disp or 0)<=0.75 and max_age<=120 else 'LOW')
+              bid=med([v.get('bid') for v in good.values()]); ask=med([v.get('ask') for v in good.values()])
               spread=((ask-bid)/mp*100) if ask and bid and ask>=bid else None
-              mark=median([v.get('mark') for v in good.values()])
-              index=median([v.get('index') for v in good.values()])
-              funding=median([v.get('funding') for v in good.values()])
-              oi=median([v.get('open_interest_usd') for v in good.values()])
+              mark=med([v.get('mark') for v in good.values()]); index=med([v.get('index') for v in good.values()]); funding=med([v.get('funding') for v in good.values()]); oi=med([v.get('open_interest_usd') for v in good.values()])
               volume=sum(v.get('volume_24h_quote') or 0 for v in good.values()) or None
-
-              ch={}
-              for mins,label in [(5,'5m'),(15,'15m'),(60,'1h'),(240,'4h')]:
-                  old=prior(s,mins,'median_price')
-                  ch[label]=pct(mp,old)
-              oi_old=prior(s,60,'open_interest_usd')
-              oi_ch_1h=pct(oi,oi_old)
-
-              # Conservative anomaly score, 0-100.
+              changes={}
+              for mins,label in [(5,'5m'),(15,'15m'),(60,'1h'),(240,'4h')]:changes[label]=pct(mp,prior(s,mins,'median_price'))
+              oi_ch=pct(oi,prior(s,60,'open_interest_usd'))
+              gs=gate_stats.get(s,{})
+              liq=(gs.get('long_liq_usd') or 0)+(gs.get('short_liq_usd') or 0)
               score=0.0
-              score+=min(25,abs(ch['5m'] or 0)*12)
-              score+=min(25,abs(ch['1h'] or 0)*7)
-              score+=min(15,abs(ch['4h'] or 0)*2.5)
-              score+=min(15,abs(oi_ch_1h or 0)*3)
-              if funding is not None: score+=min(10,abs(funding)*10000*1.5)
-              if dispersion is not None and dispersion>0.25: score+=min(10,(dispersion-0.25)*20)
-              score=round(min(100,score),1)
+              score+=min(25,abs(changes['5m'] or 0)*12)+min(25,abs(changes['1h'] or 0)*7)+min(15,abs(changes['4h'] or 0)*2.5)+min(15,abs(oi_ch or 0)*3)
+              if funding is not None:score+=min(10,abs(funding)*10000*1.5)
+              if liq:score+=min(10,math.log10(max(1,liq))*1.4)
+              if disp is not None and disp>0.25:score+=min(10,(disp-0.25)*20)
+              market[s]={'median_price':mp,'mark_price':mark,'index_price':index,'bid':bid,'ask':ask,'spread_pct':spread,'funding_rate':funding,'open_interest_usd':oi,'oi_change_1h_pct':oi_ch,'long_liq_usd_5m':gs.get('long_liq_usd'),'short_liq_usd_5m':gs.get('short_liq_usd'),'long_short_account_ratio':gs.get('lsr_account'),'long_short_taker_ratio':gs.get('lsr_taker'),'volume_24h_quote_sum':volume,'change_5m_pct':changes['5m'],'change_15m_pct':changes['15m'],'change_1h_pct':changes['1h'],'change_4h_pct':changes['4h'],'anomaly_score':round(min(100,score),1),'source_count':len(good),'price_dispersion_pct':disp,'data_age_seconds':max_age,'data_quality':quality,'sources':good}
 
-              market[s]={
-                  'median_price':mp,
-                  'mark_price':mark,
-                  'index_price':index,
-                  'bid':bid,
-                  'ask':ask,
-                  'spread_pct':spread,
-                  'funding_rate':funding,
-                  'open_interest_usd':oi,
-                  'oi_change_1h_pct':oi_ch_1h,
-                  'volume_24h_quote_sum':volume,
-                  'change_5m_pct':ch['5m'],
-                  'change_15m_pct':ch['15m'],
-                  'change_1h_pct':ch['1h'],
-                  'change_4h_pct':ch['4h'],
-                  'anomaly_score':score,
-                  'source_count':len(good),
-                  'price_dispersion_pct':dispersion,
-                  'data_age_seconds':max_age,
-                  'data_quality':quality,
-                  'sources':good
-              }
-
-          quality_counts={q:sum(1 for v in market.values() if v.get('data_quality')==q) for q in ['HIGH','MEDIUM','LOW']}
-          out={
-              'generated_at':datetime.now(timezone.utc).isoformat(),
-              'ts_ms':NOW_MS,
-              'refresh_target_seconds':300,
-              'quality_counts':quality_counts,
-              'source_errors':errors,
-              'market':market
-          }
-          with open('latest.json','w',encoding='utf-8') as fh: json.dump(out,fh,ensure_ascii=False,separators=(',',':'))
-
-          # Lightweight sorted anomaly view.
-          anomalies=[]
-          for s,v in market.items():
-              if v.get('anomaly_score') is not None:
-                  anomalies.append({'symbol':s,'score':v['anomaly_score'],'price':v.get('median_price'),'change_5m_pct':v.get('change_5m_pct'),'change_1h_pct':v.get('change_1h_pct'),'change_4h_pct':v.get('change_4h_pct'),'oi_change_1h_pct':v.get('oi_change_1h_pct'),'funding_rate':v.get('funding_rate'),'data_quality':v.get('data_quality')})
-          anomalies.sort(key=lambda x:x['score'],reverse=True)
-          with open('anomalies.json','w',encoding='utf-8') as fh: json.dump({'ts_ms':NOW_MS,'items':anomalies},fh,ensure_ascii=False,separators=(',',':'))
-
-          # Keep ~48h at 5-minute cadence.
+          qc={q:sum(1 for v in market.values() if v.get('data_quality')==q) for q in ['HIGH','MEDIUM','LOW']}
+          out={'generated_at':datetime.now(timezone.utc).isoformat(),'ts_ms':NOW_MS,'refresh_target_seconds':300,'quality_counts':qc,'source_errors':errors,'market':market}
+          with open('latest.json','w',encoding='utf-8') as fh:json.dump(out,fh,ensure_ascii=False,separators=(',',':'))
+          an=[{'symbol':s,'score':v.get('anomaly_score'),'price':v.get('median_price'),'change_5m_pct':v.get('change_5m_pct'),'change_1h_pct':v.get('change_1h_pct'),'change_4h_pct':v.get('change_4h_pct'),'oi_change_1h_pct':v.get('oi_change_1h_pct'),'funding_rate':v.get('funding_rate'),'long_liq_usd_5m':v.get('long_liq_usd_5m'),'short_liq_usd_5m':v.get('short_liq_usd_5m'),'data_quality':v.get('data_quality')} for s,v in market.items()]
+          an.sort(key=lambda x:x.get('score') or 0,reverse=True)
+          with open('anomalies.json','w',encoding='utf-8') as fh:json.dump({'ts_ms':NOW_MS,'items':an},fh,ensure_ascii=False,separators=(',',':'))
           compact={'ts_ms':NOW_MS,'market':{s:{'median_price':v.get('median_price'),'open_interest_usd':v.get('open_interest_usd')} for s,v in market.items()}}
-          history.append(compact)
-          history=[h for h in history if h.get('ts_ms',0)>=NOW_MS-48*3600*1000][-650:]
-          with open('history.json','w',encoding='utf-8') as fh: json.dump(history,fh,separators=(',',':'))
-
-          health={'generated_at':out['generated_at'],'ts_ms':NOW_MS,'source_errors':errors,'symbols':len(market),'high_quality':quality_counts['HIGH'],'medium_quality':quality_counts['MEDIUM'],'low_quality':quality_counts['LOW']}
-          with open('health.json','w',encoding='utf-8') as fh: json.dump(health,fh,separators=(',',':'))
+          history.append(compact); history=[h for h in history if h.get('ts_ms',0)>=NOW_MS-48*3600*1000][-650:]
+          with open('history.json','w',encoding='utf-8') as fh:json.dump(history,fh,separators=(',',':'))
+          health={'generated_at':out['generated_at'],'ts_ms':NOW_MS,'source_errors':errors,'symbols':len(market),'high_quality':qc['HIGH'],'medium_quality':qc['MEDIUM'],'low_quality':qc['LOW']}
+          with open('health.json','w',encoding='utf-8') as fh:json.dump(health,fh,separators=(',',':'))
           print(json.dumps(health,indent=2))
           PY
 
