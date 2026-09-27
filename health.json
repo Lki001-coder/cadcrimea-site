@@ -1,1 +1,1 @@
-{"generated_at":"2026-09-27T18:59:16.673626+00:00","ts_ms":1790535542037,"source_errors":{"binance":"<HTTPError 451: ''>","bybit":"<HTTPError 403: 'Forbidden'>"},"symbols":11,"high_quality":11,"medium_quality":0,"low_quality":0}
+{"generated_at":"2026-09-27T22:02:15.854857+00:00","ts_ms":1790546524509,"source_errors":{"binance":"<HTTPError 451: ''>","bybit":"<HTTPError 403: 'Forbidden'>"},"symbols":11,"high_quality":10,"medium_quality":1,"low_quality":0}
