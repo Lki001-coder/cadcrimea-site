@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/crypto-market-feed.yml'
       - 'scripts/crypto_market_feed.py'
+      - 'scripts/toobit_feed.py'
   schedule:
     - cron: '*/5 * * * *'
 
@@ -41,6 +42,10 @@ jobs:
         shell: bash
         run: python3 scripts/crypto_market_feed.py /tmp/crypto-feed
 
+      - name: Fetch direct Toobit futures data
+        shell: bash
+        run: python3 scripts/toobit_feed.py /tmp/crypto-feed
+
       - name: Publish isolated data branch
         shell: bash
         run: |
@@ -57,7 +62,8 @@ jobs:
           cp /tmp/crypto-feed/anomalies.json ./anomalies.json
           cp /tmp/crypto-feed/history.json ./history.json
           cp /tmp/crypto-feed/health.json ./health.json
-          git add latest.json anomalies.json history.json health.json
+          cp /tmp/crypto-feed/toobit.json ./toobit.json
+          git add latest.json anomalies.json history.json health.json toobit.json
           if git diff --cached --quiet; then
             echo 'No changes'
             exit 0
