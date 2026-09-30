@@ -1,72 +1,88 @@
-name: Crypto Market Feed
+name: Crypto Toobit Snapshot
 
 on:
-  # Legacy snapshot job. The live market feed now runs continuously on the
-  # production server, so GitHub Actions is no longer on the critical path.
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - '.github/workflows/crypto-market-feed.yml'
-      - 'scripts/crypto_market_feed.py'
+      - 'scripts/live_toobit_snapshot.py'
       - 'scripts/toobit_feed.py'
+  schedule:
+    # Two staggered 5-minute schedules. Each individual cron respects GitHub's
+    # 5-minute minimum; together they provide a second chance every 2-3 min.
+    - cron: '1-56/5 * * * *'
+    - cron: '4-59/5 * * * *'
 
 permissions:
   contents: write
 
 concurrency:
-  group: crypto-market-feed
-  cancel-in-progress: false
+  group: crypto-toobit-snapshot
+  cancel-in-progress: true
 
 jobs:
-  update-feed:
+  publish-toobit:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 2
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Restore feed history
+      - name: Build fresh Toobit snapshot
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p /tmp/crypto-feed
-          if git ls-remote --exit-code --heads origin crypto-data >/dev/null 2>&1; then
-            git fetch origin crypto-data:refs/remotes/origin/crypto-data
-            git show origin/crypto-data:history.json > /tmp/crypto-feed/history.json 2>/dev/null || true
+          if python3 scripts/live_toobit_snapshot.py /tmp/crypto-feed/toobit.json; then
+            echo 'Using always-on server live feed'
+          else
+            echo 'Live feed unavailable/stale; falling back to direct Toobit API'
+            rm -f /tmp/crypto-feed/toobit.json
+            python3 scripts/toobit_feed.py /tmp/crypto-feed
           fi
+          python3 - <<'PY'
+          import json, time
+          p='/tmp/crypto-feed/toobit.json'
+          d=json.load(open(p,encoding='utf-8'))
+          age=int(time.time()*1000)-int(d['generated_ms'])
+          assert age < 120000, f'generated snapshot already stale: {age}ms'
+          assert len(d.get('market',{})) >= 8, 'too few symbols in snapshot'
+          print({'generated_age_ms':age,'symbols':len(d['market']),'source':d.get('source','direct-toobit')})
+          PY
 
-      - name: Fetch and aggregate public futures data
-        shell: bash
-        run: python3 scripts/crypto_market_feed.py /tmp/crypto-feed
-
-      - name: Fetch direct Toobit futures data
-        shell: bash
-        run: python3 scripts/toobit_feed.py /tmp/crypto-feed
-
-      - name: Publish isolated data branch
+      - name: Publish to crypto-data
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
           git config user.name 'crypto-feed-bot'
           git config user.email 'crypto-feed-bot@users.noreply.github.com'
-          if git show-ref --verify --quiet refs/remotes/origin/crypto-data; then
-            git checkout -B crypto-data origin/crypto-data
-          else
-            git checkout --orphan crypto-data
-            git rm -rf . >/dev/null 2>&1 || true
-          fi
-          cp /tmp/crypto-feed/latest.json ./latest.json
-          cp /tmp/crypto-feed/anomalies.json ./anomalies.json
-          cp /tmp/crypto-feed/history.json ./history.json
-          cp /tmp/crypto-feed/health.json ./health.json
-          cp /tmp/crypto-feed/toobit.json ./toobit.json
-          git add latest.json anomalies.json history.json health.json toobit.json
-          if git diff --cached --quiet; then
-            echo 'No changes'
-            exit 0
-          fi
-          git commit -m "update crypto market feed $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          git push origin crypto-data --force
+
+          for attempt in 1 2 3; do
+            git fetch origin crypto-data:refs/remotes/origin/crypto-data || true
+            if git show-ref --verify --quiet refs/remotes/origin/crypto-data; then
+              git checkout -B crypto-data origin/crypto-data
+            else
+              git checkout --orphan crypto-data
+              git rm -rf . >/dev/null 2>&1 || true
+            fi
+
+            cp /tmp/crypto-feed/toobit.json ./toobit.json
+            git add toobit.json
+            if git diff --cached --quiet; then
+              echo 'No snapshot change'
+              exit 0
+            fi
+            git commit -m "update Toobit snapshot $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+
+            if git push origin HEAD:crypto-data; then
+              exit 0
+            fi
+            echo "Push race on attempt $attempt; retrying with latest crypto-data"
+            git checkout main
+            sleep 2
+          done
+          echo 'Failed to publish Toobit snapshot after 3 attempts' >&2
+          exit 1
