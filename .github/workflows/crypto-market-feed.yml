@@ -1,6 +1,8 @@
 name: Crypto Market Feed
 
 on:
+  # Legacy snapshot job. The live market feed now runs continuously on the
+  # production server, so GitHub Actions is no longer on the critical path.
   workflow_dispatch:
   push:
     branches: [main]
@@ -8,20 +10,12 @@ on:
       - '.github/workflows/crypto-market-feed.yml'
       - 'scripts/crypto_market_feed.py'
       - 'scripts/toobit_feed.py'
-  schedule:
-    # Two staggered schedules: GitHub cron can be delayed, so this gives the
-    # market feed a second independent chance to refresh inside the 10m SLA.
-    # Offsets also avoid minute 00, when scheduled Actions are most congested.
-    - cron: '1-56/5 * * * *'
-    - cron: '4-59/5 * * * *'
 
 permissions:
   contents: write
 
 concurrency:
   group: crypto-market-feed
-  # Never cancel an in-flight market refresh just because another scheduled
-  # refresh was queued. The queued run can start after the current one.
   cancel-in-progress: false
 
 jobs:
