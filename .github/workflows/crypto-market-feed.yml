@@ -9,14 +9,20 @@ on:
       - 'scripts/crypto_market_feed.py'
       - 'scripts/toobit_feed.py'
   schedule:
-    - cron: '*/5 * * * *'
+    # Two staggered schedules: GitHub cron can be delayed, so this gives the
+    # market feed a second independent chance to refresh inside the 10m SLA.
+    # Offsets also avoid minute 00, when scheduled Actions are most congested.
+    - cron: '1-56/5 * * * *'
+    - cron: '4-59/5 * * * *'
 
 permissions:
   contents: write
 
 concurrency:
   group: crypto-market-feed
-  cancel-in-progress: true
+  # Never cancel an in-flight market refresh just because another scheduled
+  # refresh was queued. The queued run can start after the current one.
+  cancel-in-progress: false
 
 jobs:
   update-feed:
